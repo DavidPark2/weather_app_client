@@ -7,14 +7,20 @@
   },
   "dependencies": {
     "body-parser": "~1.15.1",
-    "bootstrap": "^3.3.6",
     "cookie-parser": "~1.4.3",
+    "cors": "^2.7.1",
+    "deasync": "^0.1.7",
     "debug": "~2.2.0",
+    "dotenv": "^2.0.0",
     "express": "~4.13.4",
+    "express-session": "^1.14.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.1.0",
     "hbs": "~4.0.0",
     "jquery": "^3.1.0",
     "less-middleware": "1.0.x",
     "morgan": "~1.7.0",
+    "request": "^2.73.0",
     "serve-favicon": "~2.3.0"
   }
 }

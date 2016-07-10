@@ -1,12 +1,20 @@
+require('dotenv').config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
+var session = require('express-session');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var weather = require('./controllers/weather');
+var todayWeather = require('./controllers/todayWeather');
+var hourlyWeather = require('./controllers/hourlyWeather');
+var fiveDayWeather = require('./controllers/fiveDayWeather');
+var yearlyWeather = require('./controllers/yearlyWeather');
+var searchHistory = require('./controllers/searchHistory');
 
 var app = express();
 
@@ -16,6 +24,7 @@ app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,8 +32,19 @@ app.use(cookieParser());
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+// app.set('trust proxy', 1);
+app.use(session({
+  secret: 'spacecats',
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use('/weather', weather);
+app.use('/todayWeather', todayWeather);
+app.use('/hourlyWeather', hourlyWeather);
+app.use('/fiveDayWeather', fiveDayWeather);
+app.use('/yearlyWeather', yearlyWeather);
+app.use('/searchHistory', searchHistory);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
