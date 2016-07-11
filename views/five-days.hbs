@@ -15,14 +15,16 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th>{{day}}</th>
-					<th>{{high}}&deg;/{{low}}&deg;</th>
-					<th>{{summary}}</th>
-					<th>{{rain}}%</th>
-					<th>{{humidity}}%</th>
-					<th>{{rise}}am/{{set}}pm</th>
-				</tr>
+				{{#each days}}
+					<tr>
+						<th>{{day}}</th>
+						<th>{{high}}&deg;/{{low}}&deg;</th>
+						<th>{{summary}}</th>
+						<th>{{rain}}%</th>
+						<th>{{humidity}}%</th>
+						<th>{{rise}}/{{set}}</th>
+					</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

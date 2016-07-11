@@ -3,10 +3,8 @@ var controller = express.Router();
 var timestamp = require('../public/javascripts/timestampConverter');
 
 controller.get('/', function(req, res, next) {
-	// Need to change location
-	console.log('--------------------reqqqq!');
-	console.log(req.session.weather);
-	todayWeather = req.session.weather;
+
+	var todayWeather = req.session.weather;
 
 	var sunrise = todayWeather.allWeather.current.daily.data[0].sunriseTime;
 	var sunset = todayWeather.allWeather.current.daily.data[0].sunsetTime;
@@ -15,16 +13,16 @@ controller.get('/', function(req, res, next) {
 	var convertedSunset = timestamp.convertTime(sunset);
 
   	res.render('today', {location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
-  		      temp: todayWeather.allWeather.current.currently.temperature, 
-  		      humidity: todayWeather.allWeather.current.currently.humidity * 100,
-  		      feelLike: todayWeather.allWeather.current.currently.apparentTemperature, 
-  		      wind: todayWeather.allWeather.current.currently.windSpeed,
+  		      temp: parseInt(todayWeather.allWeather.current.currently.temperature), 
+  		      humidity: parseInt(todayWeather.allWeather.current.currently.humidity * 100),
+  		      feelLike: parseInt(todayWeather.allWeather.current.currently.apparentTemperature), 
+  		      wind: parseInt(todayWeather.allWeather.current.currently.windSpeed),
   		      summary: todayWeather.allWeather.current.currently.summary, 
-  		      visibility: todayWeather.allWeather.current.currently.visibility,
+  		      visibility: parseInt(todayWeather.allWeather.current.currently.visibility),
   		      sunrise: convertedSunrise, 
-  		      dewpoint: todayWeather.allWeather.current.currently.dewPoint,
+  		      dewpoint: parseInt(todayWeather.allWeather.current.currently.dewPoint),
   		      sunset: convertedSunset, 
-  		      rain: todayWeather.allWeather.current.currently.precipProbability
+  		      rain: parseInt(todayWeather.allWeather.current.currently.precipProbability * 100)
   		  });
 })
 

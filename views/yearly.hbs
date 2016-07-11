@@ -11,16 +11,20 @@
 					<th>Feel like High/Low</th>
 					<th>Summary</th>
 					<th>Wind Speed</th>
+					<th>Humidity</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th>{{date}}</th>
-					<th>{{high}}&deg;/{{low}}&deg;</th>
-					<th>{{fhigh}}&deg;/{{flow}}&deg;</th>
-					<th>{{summary}}</th>
-					<th>{{wind}}mph</th>
-				</tr>
+				{{#each years}}
+					<tr>
+						<th>{{date}}</th>
+						<th>{{high}}&deg;/{{low}}&deg;</th>
+						<th>{{fhigh}}&deg;/{{flow}}&deg;</th>
+						<th>{{summary}}</th>
+						<th>{{wind}} mph</th>
+						<th>{{humidity}}%</th>
+					</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>

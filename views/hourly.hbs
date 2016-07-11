@@ -14,13 +14,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<th>{{time}}am</th>
-					<th>{{temp}}&deg;</th>
-					<th>{{summary}}</th>
-					<th>{{rain}}%</th>
-					<th>{{humidity}}%</th>
-				</tr>
+				{{#each hour}}
+					<tr>
+						<th>{{time}}</th>
+						<th>{{temp}}&deg;</th>
+						<th>{{summary}}</th>
+						<th>{{rain}}%</th>
+						<th>{{humidity}}%</th>
+					</tr>
+				{{/each}}
 			</tbody>
 		</table>
 	</div>
