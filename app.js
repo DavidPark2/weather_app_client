@@ -10,6 +10,7 @@ var cors = require('cors');
 var session = require('express-session');
 
 var weather = require('./controllers/weather');
+var account = require('./controllers/account');
 var todayWeather = require('./controllers/todayWeather');
 var hourlyWeather = require('./controllers/hourlyWeather');
 var fiveDayWeather = require('./controllers/fiveDayWeather');
@@ -40,6 +41,7 @@ app.use(session({
 }));
 
 app.use('/weather', weather);
+app.use('/accounts', account);
 app.use('/todayWeather', todayWeather);
 app.use('/hourlyWeather', hourlyWeather);
 app.use('/fiveDayWeather', fiveDayWeather);
