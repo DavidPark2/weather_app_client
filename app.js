@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var session = require('express-session');
 
+var defaultPage = require('./controllers/default');
 var weather = require('./controllers/weather');
 var account = require('./controllers/account');
 var todayWeather = require('./controllers/todayWeather');
@@ -40,6 +41,7 @@ app.use(session({
   saveUninitialized: false
 }));
 
+app.use('/', defaultPage);
 app.use('/weather', weather);
 app.use('/accounts', account);
 app.use('/todayWeather', todayWeather);
