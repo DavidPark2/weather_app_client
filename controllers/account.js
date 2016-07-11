@@ -11,14 +11,17 @@ controller.post('/login', function(req, res, next) {
 				 password: req.body.password
 				};
 
-	console.log('---------------------start login req');
-	console.log(login);
-	console.log('---------------------end login req');
 	var requestedLogin = accountRequest.login(login);
-	console.log('---------------------start requestedLogin');
+	console.log('------------------------requestedLogin')
 	console.log(requestedLogin);
-	console.log('---------------------end requestedLogin');
-
+	if (requestedLogin.success === true) {
+		req.session.account = login.email;
+		console.log('----------------------req.session')
+		console.log(req.session.account);
+		res.redirect('/weather');
+	} else {
+		res.redirect('/accounts');
+	}
 })
 
 controller.post('/signup', function(req, res, next) {
@@ -27,14 +30,17 @@ controller.post('/signup', function(req, res, next) {
 				  password: req.body.password
 				 };
 
- 	console.log('---------------------start signup req');
-	console.log(signup);
-	console.log('---------------------end signup req');
-
 	var requestedSignup = accountRequest.signup(signup);
-	console.log('---------------------start requestedSignup');
+	console.log('------------------------requestSignup')
 	console.log(requestedSignup);
-	console.log('---------------------end requestedSignup');
+	if (requestedSignup.success === true) {
+		req.session.account = signup.email;
+		console.log('----------------------req.session')
+		console.log(req.session.account);
+		res.redirect('/weather');
+	} else {
+		res.redirect('/accounts');
+	}
 })
 
 module.exports = controller;
