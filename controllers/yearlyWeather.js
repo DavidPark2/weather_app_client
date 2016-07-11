@@ -6,71 +6,91 @@ controller.get('/', function(req, res, next) {
 	// session information
 	var yearlyWeather = req.session.weather;
 
-	var currentYear = yearlyWeather.allWeather.current.daily.data[0];
-	var oneYearBefore = yearlyWeather.allWeather.one.daily.data[0];
-	var twoYearBefore = yearlyWeather.allWeather.two.daily.data[0];
-	var threeYearBefore = yearlyWeather.allWeather.three.daily.data[0];
-	var fourYearBefore = yearlyWeather.allWeather.four.daily.data[0];
-	var fiveYearBefore = yearlyWeather.allWeather.five.daily.data[0];
+	function trueOrFalse() {
+	    if (yearlyWeather === undefined) {
+	      	return false;
+	    } else {
+	      	return true;
+	    }
+  	}
 
-	res.render('yearly', {location: yearlyWeather.coordinatesAndCity.results[0].formatted_address, 
+  	function trueOrFalseYearly() {
+	    if (trueOrFalse() === true) {
+	      return { currentYear: yearlyWeather.allWeather.current.daily.data[0],
+					oneYearBefore: yearlyWeather.allWeather.one.daily.data[0],
+					twoYearBefore: yearlyWeather.allWeather.two.daily.data[0],
+					threeYearBefore: yearlyWeather.allWeather.three.daily.data[0],
+					fourYearBefore: yearlyWeather.allWeather.four.daily.data[0],
+					fiveYearBefore: yearlyWeather.allWeather.five.daily.data[0]
+	      }
+	    }
+	  }
+
+	// var currentYear = yearlyWeather.allWeather.current.daily.data[0];
+	// var oneYearBefore = yearlyWeather.allWeather.one.daily.data[0];
+	// var twoYearBefore = yearlyWeather.allWeather.two.daily.data[0];
+	// var threeYearBefore = yearlyWeather.allWeather.three.daily.data[0];
+	// var fourYearBefore = yearlyWeather.allWeather.four.daily.data[0];
+	// var fiveYearBefore = yearlyWeather.allWeather.five.daily.data[0];
+
+	res.render('yearly', trueOrFalse() ? {location: yearlyWeather.coordinatesAndCity.results[0].formatted_address, 
 						years: [
-						{ date: timestamp.convertDate(currentYear.time),
-						high: parseInt(currentYear.temperatureMax), 
-						low: parseInt(currentYear.temperatureMin),
-						fhigh: parseInt(currentYear.apparentTemperatureMax), 
-						flow: parseInt(currentYear.apparentTemperatureMin),
-						summary: currentYear.summary,
-						wind: parseInt(currentYear.windSpeed),
-						humidity: parseInt(currentYear.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().currentYear.time),
+						high: parseInt(trueOrFalseYearly().currentYear.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().currentYear.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().currentYear.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().currentYear.apparentTemperatureMin),
+						summary: trueOrFalseYearly().currentYear.summary,
+						wind: parseInt(trueOrFalseYearly().currentYear.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().currentYear.humidity) },
 						
-						{ date: timestamp.convertDate(oneYearBefore.time),
-						high: parseInt(oneYearBefore.temperatureMax), 
-						low: parseInt(oneYearBefore.temperatureMin),
-						fhigh: parseInt(oneYearBefore.apparentTemperatureMax), 
-						flow: parseInt(oneYearBefore.apparentTemperatureMin),
-						summary: oneYearBefore.summary,
-						wind: parseInt(oneYearBefore.windSpeed),
-						humidity: parseInt(oneYearBefore.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().oneYearBefore.time),
+						high: parseInt(trueOrFalseYearly().oneYearBefore.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().oneYearBefore.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().oneYearBefore.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().oneYearBefore.apparentTemperatureMin),
+						summary: trueOrFalseYearly().oneYearBefore.summary,
+						wind: parseInt(trueOrFalseYearly().oneYearBefore.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().oneYearBefore.humidity) },
 
-						{ date: timestamp.convertDate(twoYearBefore.time),
-						high: parseInt(twoYearBefore.temperatureMax), 
-						low: parseInt(twoYearBefore.temperatureMin),
-						fhigh: parseInt(twoYearBefore.apparentTemperatureMax), 
-						flow: parseInt(twoYearBefore.apparentTemperatureMin),
-						summary: twoYearBefore.summary,
-						wind: parseInt(twoYearBefore.windSpeed),
-						humidity: parseInt(twoYearBefore.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().twoYearBefore.time),
+						high: parseInt(trueOrFalseYearly().twoYearBefore.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().twoYearBefore.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().twoYearBefore.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().twoYearBefore.apparentTemperatureMin),
+						summary: trueOrFalseYearly().twoYearBefore.summary,
+						wind: parseInt(trueOrFalseYearly().twoYearBefore.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().twoYearBefore.humidity) },
 
-						{ date: timestamp.convertDate(threeYearBefore.time),
-						high: parseInt(threeYearBefore.temperatureMax), 
-						low: parseInt(threeYearBefore.temperatureMin),
-						fhigh: parseInt(threeYearBefore.apparentTemperatureMax), 
-						flow: parseInt(threeYearBefore.apparentTemperatureMin),
-						summary: threeYearBefore.summary,
-						wind: parseInt(threeYearBefore.windSpeed),
-						humidity: parseInt(threeYearBefore.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().threeYearBefore.time),
+						high: parseInt(trueOrFalseYearly().threeYearBefore.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().threeYearBefore.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().threeYearBefore.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().threeYearBefore.apparentTemperatureMin),
+						summary: trueOrFalseYearly().threeYearBefore.summary,
+						wind: parseInt(trueOrFalseYearly().threeYearBefore.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().threeYearBefore.humidity) },
 
-						{ date: timestamp.convertDate(fourYearBefore.time),
-						high: parseInt(fourYearBefore.temperatureMax), 
-						low: parseInt(fourYearBefore.temperatureMin),
-						fhigh: parseInt(fourYearBefore.apparentTemperatureMax), 
-						flow: parseInt(fourYearBefore.apparentTemperatureMin),
-						summary: fourYearBefore.summary,
-						wind: parseInt(fourYearBefore.windSpeed),
-						humidity: parseInt(fourYearBefore.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().fourYearBefore.time),
+						high: parseInt(trueOrFalseYearly().fourYearBefore.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().fourYearBefore.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().fourYearBefore.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().fourYearBefore.apparentTemperatureMin),
+						summary: trueOrFalseYearly().fourYearBefore.summary,
+						wind: parseInt(trueOrFalseYearly().fourYearBefore.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().fourYearBefore.humidity) },
 
-						{ date: timestamp.convertDate(fiveYearBefore.time),
-						high: parseInt(fiveYearBefore.temperatureMax), 
-						low: parseInt(fiveYearBefore.temperatureMin),
-						fhigh: parseInt(fiveYearBefore.apparentTemperatureMax), 
-						flow: parseInt(fiveYearBefore.apparentTemperatureMin),
-						summary: fiveYearBefore.summary,
-						wind: parseInt(fiveYearBefore.windSpeed),
-						humidity: parseInt(fiveYearBefore.humidity) },
+						{ date: timestamp.convertDate(trueOrFalseYearly().fiveYearBefore.time),
+						high: parseInt(trueOrFalseYearly().fiveYearBefore.temperatureMax), 
+						low: parseInt(trueOrFalseYearly().fiveYearBefore.temperatureMin),
+						fhigh: parseInt(trueOrFalseYearly().fiveYearBefore.apparentTemperatureMax), 
+						flow: parseInt(trueOrFalseYearly().fiveYearBefore.apparentTemperatureMin),
+						summary: trueOrFalseYearly().fiveYearBefore.summary,
+						wind: parseInt(trueOrFalseYearly().fiveYearBefore.windSpeed),
+						humidity: parseInt(trueOrFalseYearly().fiveYearBefore.humidity) },
 
 		]
-	});
+	} : {location: 'To get started, enter your location above'});
 })
 
 module.exports = controller;

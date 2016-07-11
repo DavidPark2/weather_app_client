@@ -6,24 +6,37 @@ controller.get('/', function(req, res, next) {
 
 	var todayWeather = req.session.weather;
 
-	var sunrise = todayWeather.allWeather.current.daily.data[0].sunriseTime;
-	var sunset = todayWeather.allWeather.current.daily.data[0].sunsetTime;
+  function trueOrFalse() {
+    if (todayWeather === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
-	var convertedSunrise = timestamp.convertTime(sunrise);
-	var convertedSunset = timestamp.convertTime(sunset);
+  function trueOfFalseSun() {
+    if (trueOrFalse() === true) {
+      return { convertedSunrise: timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunriseTime),
+               convertedSunset: timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunsetTime)
+      }
+    }
+  }
 
-  	res.render('today', {location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
-  		      temp: parseInt(todayWeather.allWeather.current.currently.temperature), 
-  		      humidity: parseInt(todayWeather.allWeather.current.currently.humidity * 100),
-  		      feelLike: parseInt(todayWeather.allWeather.current.currently.apparentTemperature), 
-  		      wind: parseInt(todayWeather.allWeather.current.currently.windSpeed),
-  		      summary: todayWeather.allWeather.current.currently.summary, 
-  		      visibility: parseInt(todayWeather.allWeather.current.currently.visibility),
-  		      sunrise: convertedSunrise, 
-  		      dewpoint: parseInt(todayWeather.allWeather.current.currently.dewPoint),
-  		      sunset: convertedSunset, 
-  		      rain: parseInt(todayWeather.allWeather.current.currently.precipProbability * 100)
-  		  });
+  // var convertedSunrise = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunriseTime);
+  // var convertedSunset = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunsetTime);
+
+	res.render('today', trueOrFalse() ? {location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
+		      temp: parseInt(todayWeather.allWeather.current.currently.temperature), 
+		      humidity: parseInt(todayWeather.allWeather.current.currently.humidity * 100),
+		      feelLike: parseInt(todayWeather.allWeather.current.currently.apparentTemperature), 
+		      wind: parseInt(todayWeather.allWeather.current.currently.windSpeed),
+		      summary: todayWeather.allWeather.current.currently.summary, 
+		      visibility: parseInt(todayWeather.allWeather.current.currently.visibility),
+		      sunrise: trueOfFalseSun().convertedSunrise, 
+		      dewpoint: parseInt(todayWeather.allWeather.current.currently.dewPoint),
+		      sunset: trueOfFalseSun().convertedSunset, 
+		      rain: parseInt(todayWeather.allWeather.current.currently.precipProbability * 100)
+  } : {location: 'To get started, enter your location above'});
 })
 
 module.exports = controller;

@@ -9,9 +9,10 @@ controller.get('/', function(req, res, next) {
 })
 
 controller.post('/input', function(req, res, next) {
-	var input = req.body.area;
+	var inputLocation = req.body.area;
+	var inputAccount = req.session.account;
 
-	var requestedWeather = weatherRequest.weatherInput(input);
+	var requestedWeather = weatherRequest.weatherInput(inputLocation, inputAccount);
 	req.session.weather = requestedWeather;
 	res.redirect('/todayWeather');
 })

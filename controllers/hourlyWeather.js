@@ -5,26 +5,41 @@ var timestamp = require('../public/javascripts/timestampConverter');
 controller.get('/', function(req, res, next) {
 	// Session information
 	var todayWeather = req.session.weather;
+	console.log(todayWeather);
 
-	var hourlyWeather = todayWeather.allWeather.current.hourly.data;
+	function trueOrFalse() {
+	    if (todayWeather === undefined) {
+	      	return false;
+	    } else {
+	      	return true;
+	    }
+  	}
 
-	// Pushing information selected from below
-	var filteredHourlyWeather = [];
+  	function trueOfFalseHourly() {
+    	if (trueOrFalse() === true) {
+    		var hourlyWeather = todayWeather.allWeather.current.hourly.data;
+    		// Pushing information selected from below
+    		var filteredHourlyWeather = [];
+    		// Selecting information receieved from rest API
+			for(var i = 0; i < hourlyWeather.length; i++) {
+				filteredHourlyWeather.push({
+					time: timestamp.convertTime(hourlyWeather[i].time),
+					temp: parseInt(hourlyWeather[i].temperature) + '/' + parseInt(hourlyWeather[i].apparentTemperature),
+					summary: hourlyWeather[i].summary,
+					rain: parseInt(hourlyWeather[i].precipProbability * 100),
+					humidity: parseInt(hourlyWeather[i].humidity * 100)
+				})
+			}
 
-	// Selecting information receieved from rest API
-	for(var i = 0; i < hourlyWeather.length; i++) {
-		filteredHourlyWeather.push({
-			time: timestamp.convertTime(hourlyWeather[i].time),
-			temp: parseInt(hourlyWeather[i].temperature) + '/' + parseInt(hourlyWeather[i].apparentTemperature),
-			summary: hourlyWeather[i].summary,
-			rain: parseInt(hourlyWeather[i].precipProbability * 100),
-			humidity: hourlyWeather[i].humidity * 100
-		})
-	}
+      		return { 
+      			filteredHourlyWeather: filteredHourlyWeather
+      		}
+    	}
+  	}
 
-  	res.render('hourly', {location: todayWeather.coordinatesAndCity.results[0].formatted_address,
-  						hour: filteredHourlyWeather
-  	});
+  	res.render('hourly', trueOrFalse() ? {location: todayWeather.coordinatesAndCity.results[0].formatted_address,
+  						hour: trueOfFalseHourly().filteredHourlyWeather
+  	} : {location: 'To get started, enter your location above'});
 })
 
 module.exports = controller;

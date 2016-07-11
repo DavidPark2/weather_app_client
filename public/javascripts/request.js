@@ -1,11 +1,13 @@
 var request = require('request');
 var deasync = require('deasync');
 
-module.exports.weatherInput = function(input) {
+module.exports.weatherInput = function(inputLocation, inputAccount) {
 	var location;
 	request.post({
 		url: 'http://localhost:3000/weather/search',
-		form: {location: input}
+		form: {inputLocation: inputLocation,
+			   inputAccount: inputAccount
+		}
 	},
 		function (err, res, body) {
 			location = body;
