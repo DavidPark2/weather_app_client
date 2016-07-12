@@ -3,59 +3,11 @@
   <head>
     <title>{{title}}</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-  	<header>
-  		<div class='container'>
-  			<div class='row'>
-  				<div class='col-lg-6'>
-  					<div class="page-header">
-  						<h1>Weather!</h1>
-  					</div>
-  				</div>
-  				<div class='col-lg-6'>
-  					<form action='/accounts' method='get'>
-  						<button type="submit" class="btn btn-primary btn-lg">Log In/Sign Up</button>
-  					</form>
-  				</div>
-  			</div>
-  			<div class='row'>
-				<nav class="navbar navbar-default">
-		  			<div class="container-fluid">
-					    <!-- Brand and toggle get grouped for better mobile display -->
-					    <div class="navbar-header">
-			      			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			        			<span class="sr-only">Toggle navigation</span>
-			        			<span class="icon-bar"></span>
-			        			<span class="icon-bar"></span>
-			        			<span class="icon-bar"></span>
-			      			</button>
-			      			<a class="navbar-brand" href="/weather">Weather!</a>
-			    		</div>
-
-			    		<!-- Collect the nav links, forms, and other content for toggling -->
-			    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      			<form class="navbar-form navbar-left" role="search" action='/weather/input' method='post'>
-			        			<div class="form-group">
-			          				<input type="text" class="form-control" placeholder="Search city or Zip" name='area'>
-			        			</div>
-			        			<button type="submit" class="btn btn-danger">Submit</button>
-		      				</form>
-			      			<ul class="nav navbar-nav">
-				        		<li class="active"><a href="/todayweather">Today <span class="sr-only">(current)</span></a></li>
-				        		<li><a href="/hourlyweather">Hourly</a></li>
-				        		<li><a href="/fiveDayWeather">5 day</a></li>
-				        		<li><a href="/yearlyWeather">Year to Year Comparison</a></li>
-				        		<li><a href="/searchHistory">Search History</a></li>
-			      			</ul>
-			    		</div><!-- /.navbar-collapse -->
-		  			</div><!-- /.container-fluid -->
-				</nav>
-  			</div>
-  		</div>
-  	</header>
     {{{body}}}
+    <script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
   </body>
 </html>

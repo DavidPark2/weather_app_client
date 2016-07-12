@@ -42,7 +42,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().currentYear.apparentTemperatureMin),
 						summary: trueOrFalseYearly().currentYear.summary,
 						wind: parseInt(trueOrFalseYearly().currentYear.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().currentYear.humidity) },
+						humidity: parseInt(trueOrFalseYearly().currentYear.humidity * 100) },
 						
 						{ date: timestamp.convertDate(trueOrFalseYearly().oneYearBefore.time),
 						high: parseInt(trueOrFalseYearly().oneYearBefore.temperatureMax), 
@@ -51,7 +51,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().oneYearBefore.apparentTemperatureMin),
 						summary: trueOrFalseYearly().oneYearBefore.summary,
 						wind: parseInt(trueOrFalseYearly().oneYearBefore.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().oneYearBefore.humidity) },
+						humidity: parseInt(trueOrFalseYearly().oneYearBefore.humidity * 100) },
 
 						{ date: timestamp.convertDate(trueOrFalseYearly().twoYearBefore.time),
 						high: parseInt(trueOrFalseYearly().twoYearBefore.temperatureMax), 
@@ -60,7 +60,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().twoYearBefore.apparentTemperatureMin),
 						summary: trueOrFalseYearly().twoYearBefore.summary,
 						wind: parseInt(trueOrFalseYearly().twoYearBefore.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().twoYearBefore.humidity) },
+						humidity: parseInt(trueOrFalseYearly().twoYearBefore.humidity * 100) },
 
 						{ date: timestamp.convertDate(trueOrFalseYearly().threeYearBefore.time),
 						high: parseInt(trueOrFalseYearly().threeYearBefore.temperatureMax), 
@@ -69,7 +69,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().threeYearBefore.apparentTemperatureMin),
 						summary: trueOrFalseYearly().threeYearBefore.summary,
 						wind: parseInt(trueOrFalseYearly().threeYearBefore.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().threeYearBefore.humidity) },
+						humidity: parseInt(trueOrFalseYearly().threeYearBefore.humidity * 100) },
 
 						{ date: timestamp.convertDate(trueOrFalseYearly().fourYearBefore.time),
 						high: parseInt(trueOrFalseYearly().fourYearBefore.temperatureMax), 
@@ -78,7 +78,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().fourYearBefore.apparentTemperatureMin),
 						summary: trueOrFalseYearly().fourYearBefore.summary,
 						wind: parseInt(trueOrFalseYearly().fourYearBefore.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().fourYearBefore.humidity) },
+						humidity: parseInt(trueOrFalseYearly().fourYearBefore.humidity * 100) },
 
 						{ date: timestamp.convertDate(trueOrFalseYearly().fiveYearBefore.time),
 						high: parseInt(trueOrFalseYearly().fiveYearBefore.temperatureMax), 
@@ -87,7 +87,7 @@ controller.get('/', function(req, res, next) {
 						flow: parseInt(trueOrFalseYearly().fiveYearBefore.apparentTemperatureMin),
 						summary: trueOrFalseYearly().fiveYearBefore.summary,
 						wind: parseInt(trueOrFalseYearly().fiveYearBefore.windSpeed),
-						humidity: parseInt(trueOrFalseYearly().fiveYearBefore.humidity) },
+						humidity: parseInt(trueOrFalseYearly().fiveYearBefore.humidity * 100) },
 
 		]
 	} : {location: 'To get started, enter your location above'});

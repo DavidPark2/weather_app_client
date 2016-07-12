@@ -27,7 +27,7 @@ controller.get('/', function(req, res, next) {
 					low: parseInt(dailyWeather[i].temperatureMin),
 					summary: dailyWeather[i].summary,
 					rain: parseInt(dailyWeather[i].precipProbability * 100),
-					humidity: dailyWeather[i].humidity * 100,
+					humidity: parseInt(dailyWeather[i].humidity * 100),
 					rise: timestamp.convertTime(dailyWeather[i].sunriseTime),
 					set: timestamp.convertTime(dailyWeather[i].sunsetTime)
 				})
