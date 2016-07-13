@@ -26,13 +26,6 @@ controller.get('/', function(req, res, next) {
 	    }
 	  }
 
-	// var currentYear = yearlyWeather.allWeather.current.daily.data[0];
-	// var oneYearBefore = yearlyWeather.allWeather.one.daily.data[0];
-	// var twoYearBefore = yearlyWeather.allWeather.two.daily.data[0];
-	// var threeYearBefore = yearlyWeather.allWeather.three.daily.data[0];
-	// var fourYearBefore = yearlyWeather.allWeather.four.daily.data[0];
-	// var fiveYearBefore = yearlyWeather.allWeather.five.daily.data[0];
-
 	res.render('yearly', trueOrFalse() ? {location: yearlyWeather.coordinatesAndCity.results[0].formatted_address, 
 						years: [
 						{ date: timestamp.convertDate(trueOrFalseYearly().currentYear.time),
@@ -92,5 +85,84 @@ controller.get('/', function(req, res, next) {
 		]
 	} : {location: 'To get started, enter your location above'});
 })
+
+controller.post('/data', function(req, res, next) {
+	var yearlyWeather = req.session.weather;
+
+	function trueOrFalseYearly() {
+      	return { currentYear: yearlyWeather.allWeather.current.daily.data[0],
+				oneYearBefore: yearlyWeather.allWeather.one.daily.data[0],
+				twoYearBefore: yearlyWeather.allWeather.two.daily.data[0],
+				threeYearBefore: yearlyWeather.allWeather.three.daily.data[0],
+				fourYearBefore: yearlyWeather.allWeather.four.daily.data[0],
+				fiveYearBefore: yearlyWeather.allWeather.five.daily.data[0]
+    	}
+  	}
+
+  	console.log(trueOrFalseYearly());
+  	console.log('^^^^^^^^^^^^^^^^^Yearly')
+
+
+	if (yearlyWeather === undefined) {
+		res.json({ 'success': false })
+	} else {
+		res.json({yearsHigh: [
+		{ 
+			temperature: parseInt(trueOrFalseYearly().currentYear.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().currentYear.time)  
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().oneYearBefore.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().oneYearBefore.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().twoYearBefore.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().twoYearBefore.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().threeYearBefore.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().threeYearBefore.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().fourYearBefore.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().fourYearBefore.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().fiveYearBefore.temperatureMax),
+		   	year: timestamp.convertYear(trueOrFalseYearly().fiveYearBefore.time) 
+		}],
+		yearsLow: [
+		{
+			temperature: parseInt(trueOrFalseYearly().currentYear.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().currentYear.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().oneYearBefore.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().oneYearBefore.time) 
+		},
+		{
+			temperature: parseInt(trueOrFalseYearly().twoYearBefore.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().twoYearBefore.time) 
+	   	},
+	   	{
+	   		temperature: parseInt(trueOrFalseYearly().threeYearBefore.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().threeYearBefore.time) 
+	   	},
+	   	{
+	   		temperature: parseInt(trueOrFalseYearly().fourYearBefore.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().fourYearBefore.time) 
+	   	},
+	   	{
+	   		temperature: parseInt(trueOrFalseYearly().fiveYearBefore.temperatureMin),
+		   	year: timestamp.convertYear(trueOrFalseYearly().fiveYearBefore.time) 
+	   	}
+		]
+		})
+	}
+})
+
+
+
+
 
 module.exports = controller;

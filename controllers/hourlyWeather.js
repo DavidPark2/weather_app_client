@@ -20,7 +20,7 @@ controller.get('/', function(req, res, next) {
     		// Pushing information selected from below
     		var filteredHourlyWeather = [];
     		// Selecting information receieved from rest API
-			for(var i = 0; i < hourlyWeather.length; i++) {
+			for(var i = 0; i < 24; i++) {
 				filteredHourlyWeather.push({
 					time: timestamp.convertTime(hourlyWeather[i].time),
 					temp: parseInt(hourlyWeather[i].temperature) + '/' + parseInt(hourlyWeather[i].apparentTemperature),
@@ -41,14 +41,29 @@ controller.get('/', function(req, res, next) {
   	} : {location: 'To get started, enter your location above'});
 })
 
-controller.get('/data', function(req, res, next) {
-	var hourlyData = req.session.weather;
+// *******for future, for chart data, didn't work out for now
+// ******** chart went wacky because it went from 24 then back to 1
+// controller.post('/data', function(req, res, next) {
+// 	var hourlyData = req.session.weather;
+// 	var hourlyWeather = hourlyData.allWeather.current.hourly.data;
+// 	console.log(hourlyWeather);
+// 	// Pushing information selected from below
+// 	var filteredHourlyWeather = [];
+// 	// Selecting information receieved from rest API
+// 	for(var i = 0; i < 24; i++) {
+// 		filteredHourlyWeather.push({
+// 			temperature: parseInt(hourlyWeather[i].temperature),
+// 			hour: timestamp.convertHour(hourlyWeather[i].time)
+// 		})
+// 	}
+// 	console.log(filteredHourlyWeather);
 
-	if (hourlyData === undefined) {
-		res.json({ 'success': false })
-	} else {
-		res.json({ 'hourlyData': hourlyData})
-	}
-})
+
+// 	if (hourlyData === undefined) {
+// 		res.json({ 'success': false })
+// 	} else {
+// 		res.json({ 'data': filteredHourlyWeather})
+// 	}
+// })
 
 module.exports = controller;
