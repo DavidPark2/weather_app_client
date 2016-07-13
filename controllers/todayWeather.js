@@ -25,7 +25,7 @@ controller.get('/', function(req, res, next) {
   // var convertedSunrise = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunriseTime);
   // var convertedSunset = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunsetTime);
 
-	res.render('today', trueOrFalse() ? {location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
+	res.render('today', trueOrFalse() ? { location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
 		      temp: parseInt(todayWeather.allWeather.current.currently.temperature), 
 		      humidity: parseInt(todayWeather.allWeather.current.currently.humidity * 100),
 		      feelLike: parseInt(todayWeather.allWeather.current.currently.apparentTemperature), 

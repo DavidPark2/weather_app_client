@@ -3,6 +3,7 @@ var controller = express.Router();
 var accountRequest = require('../public/javascripts/request');
 
 controller.get('/', function(req, res, next) {
+
 	res.render('account');
 })
 

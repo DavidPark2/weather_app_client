@@ -4,8 +4,8 @@ var weatherRequest = require('../public/javascripts/request');
 
 /* GET home page. */
 controller.get('/', function(req, res, next) {
-	// Need to change location
-  res.render('weather');
+
+  	res.render('weather');
 })
 
 controller.post('/input', function(req, res, next) {

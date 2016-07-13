@@ -5,7 +5,6 @@ var timestamp = require('../public/javascripts/timestampConverter');
 controller.get('/', function(req, res, next) {
 	// Session information
 	var todayWeather = req.session.weather;
-	console.log(todayWeather);
 
 	function trueOrFalse() {
 	    if (todayWeather === undefined) {
@@ -40,6 +39,16 @@ controller.get('/', function(req, res, next) {
   	res.render('hourly', trueOrFalse() ? {location: todayWeather.coordinatesAndCity.results[0].formatted_address,
   						hour: trueOfFalseHourly().filteredHourlyWeather
   	} : {location: 'To get started, enter your location above'});
+})
+
+controller.get('/data', function(req, res, next) {
+	var hourlyData = req.session.weather;
+
+	if (hourlyData === undefined) {
+		res.json({ 'success': false })
+	} else {
+		res.json({ 'hourlyData': hourlyData})
+	}
 })
 
 module.exports = controller;
