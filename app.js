@@ -40,8 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.set('trust proxy', 1);
 app.use(session({
   secret: 'secret',
-  saveUninitialized: true,
-  resave: true,
+  saveUninitialized: false,
+  resave: false,
   store: new RedisStore({url: process.env.REDIS_URL})
 }));
 
