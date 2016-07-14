@@ -25,23 +25,39 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// sessions for heroku redis sessions
+function sessions(url, secret) {
+  var store = new RedisStore({ url: 'redis://h:p8o4qsf79huvuh9h9qmhnip0pqg@ec2-54-243-230-243.compute-1.amazonaws.com:26009' });
+  var session = expressSession({
+    secret: secret,
+    store: store,
+    resave: true,
+    saveUninitialized: true
+  });
+
+  return session;
+};
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser(config.cookie_secret)); //for heroku session
+app.use(sessions(config.redis_url, config.cookie_secret)) //for heroku session
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.set('trust proxy', 1);
-app.use(session({
-  store: new RedisStore({url: 'redis://h:p8o4qsf79huvuh9h9qmhnip0pqg@ec2-54-243-230-243.compute-1.amazonaws.com:26009'}),
-  secret: 'spacecats',
-  resave: false,
-  saveUninitialized: false
-}));
+// app.use(session({
+//   store: new RedisStore({url: 'redis://h:p8o4qsf79huvuh9h9qmhnip0pqg@ec2-54-243-230-243.compute-1.amazonaws.com:26009'}),
+//   secret: 'spacecats',
+//   resave: false,
+//   saveUninitialized: false
+// }));
+
+
 
 app.use('/', defaultPage);
 app.use('/weather', weather);
