@@ -20,6 +20,7 @@ controller.post('/login', function(req, res, next) {
 	console.log('^----------------requestLogin')
 	// if successful, create sessions
 	if (requestedLogin.success === true) {
+		console.log('right before sessions')
 		req.session.email = requestedLogin.searchHistory[0].email
 		req.session.account = requestedLogin;
 		console.log('below----------------------req.session.account')
@@ -45,6 +46,7 @@ controller.post('/signup', function(req, res, next) {
 	console.log('^----------------requestedSignup')
 	// if successful, create sessions
 	if (requestedSignup.success === true) {
+		console.log('right before sessions')
 		req.session.email = requestedSignup.searchHistory[0].email
 		req.session.account = requestedSignup;
 		console.log('below----------------------req.session.account')
