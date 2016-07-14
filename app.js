@@ -44,7 +44,7 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser(config.cookie_secret)); //for heroku session
+app.use(cookieParser()); 
 app.use(sessions(config.redis_url, config.cookie_secret)) //for heroku session
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
