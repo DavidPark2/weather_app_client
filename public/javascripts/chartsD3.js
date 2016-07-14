@@ -3,7 +3,7 @@ function yearlyChart() {
 	// gather information from yearly data
 	$.ajax({
 		method: 'post',
-		url: 'superweatherrest.herokuapp.com/yearlyWeather/data',//'http://localhost:4000/yearlyWeather/data',
+		url: 'http://superweatherrest.herokuapp.com/yearlyWeather/data',
 		async: false,
 		success: function(year) {
 			data = year;
@@ -140,7 +140,7 @@ function yearlyChart() {
 //         .attr('fill', 'none');
 // }
 
-if (window.location.href === 'http://localhost:4000/yearlyWeather') {
+if (window.location.href === 'http://superweatherrest.herokuapp.com/yearlyWeather') {
 	yearlyChart()
 } 
 

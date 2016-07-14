@@ -4,7 +4,7 @@ var deasync = require('deasync');
 module.exports.weatherInput = function(inputLocation, inputAccount) {
 	var location;
 	request.post({
-		url: 'superweatherrest.herokuapp.com/weather/search',//'http://localhost:3000/weather/search',
+		url: 'http://superweatherrest.herokuapp.com/weather/search',
 		form: {inputLocation: inputLocation,
 			   inputAccount: inputAccount
 		}
@@ -22,7 +22,7 @@ module.exports.weatherInput = function(inputLocation, inputAccount) {
 module.exports.login = function(input) {
 	var location;
 	request.post({
-		url: 'superweatherrest.herokuapp.com/users/login',//'http://localhost:3000/users/login',
+		url: 'http://superweatherrest.herokuapp.com/users/login',
 		form: input
 	},
 		function (err, res, body) {
@@ -38,7 +38,7 @@ module.exports.login = function(input) {
 module.exports.signup = function(input) {
 	var location;
 	request.post({
-		url: 'superweatherrest.herokuapp.com/users/signup',//'http://localhost:3000/users/signup',
+		url: 'http://superweatherrest.herokuapp.com/users/signup',
 		form: input
 	},
 		function (err, res, body) {
