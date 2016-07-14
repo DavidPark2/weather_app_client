@@ -10,7 +10,7 @@ controller.get('/', function(req, res, next) {
 
 controller.post('/input', function(req, res, next) {
 	var inputLocation = req.body.area;
-	var inputAccount = req.session.account;
+	var inputAccount = req.session.email;
 
 	var requestedWeather = weatherRequest.weatherInput(inputLocation, inputAccount);
 	req.session.weather = requestedWeather;

@@ -1,6 +1,5 @@
 window.onload = function() {
 	buttonHighlight();
-	loginLogoutButton();
 }
 
 
@@ -15,8 +14,3 @@ function buttonHighlight() {
 	    return this.href == url;
 	}).parent().addClass('active');
 }
-
-function loginLogoutButton() {
-
-}
-

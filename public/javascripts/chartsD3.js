@@ -138,13 +138,9 @@ function yearlyChart() {
 //         .attr('fill', 'none');
 // }
 
-if (window.location.href === 'http://localhost:4000/hourlyweather') {
-	hourlyChart();
-} else if (window.location.href === 'http://localhost:4000/fiveDayWeather') {
-	dailyChart();
-} else if (window.location.href === 'http://localhost:4000/yearlyWeather') {
+if (window.location.href === 'http://localhost:4000/yearlyWeather') {
 	yearlyChart()
-}
+} 
 
 
 

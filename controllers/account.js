@@ -16,9 +16,10 @@ controller.post('/login', function(req, res, next) {
 	console.log('------------------------requestedLogin')
 	console.log(requestedLogin);
 	if (requestedLogin.success === true) {
-		req.session.account = login.email;
+		req.session.email = requestedLogin.searchHistory[0].email
+		req.session.account = requestedLogin;
 		console.log('----------------------req.session')
-		console.log(req.session.account);
+		console.log(req.session.email);
 		res.redirect('/weather');
 	} else {
 		res.redirect('/accounts');
@@ -35,7 +36,8 @@ controller.post('/signup', function(req, res, next) {
 	console.log('------------------------requestSignup')
 	console.log(requestedSignup);
 	if (requestedSignup.success === true) {
-		req.session.account = signup.email;
+		req.session.email = requestedSignup.searchHistory[0].email
+		req.session.account = requestedSignup;
 		console.log('----------------------req.session')
 		console.log(req.session.account);
 		res.redirect('/weather');
