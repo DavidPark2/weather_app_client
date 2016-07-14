@@ -3,13 +3,11 @@ var controller = express.Router();
 var timestamp = require('../public/javascripts/timestampConverter');
 
 controller.get('/', function(req, res, next) {
-	// Need to change location
-	var searchHist = req.session.weather;
+
 	var accountHist = req.session.account;
 
-	console.log(accountHist);
-	console.log('^^^^^^^^^^^req accounts')
-
+	// determine whether req.session.account has account 
+	// information and either return false or true
 	function trueOrFalse() {
 	    if (accountHist === undefined) {
 	    	console.log('returned false')
@@ -20,6 +18,7 @@ controller.get('/', function(req, res, next) {
 	    }
   	}
 
+  	// If true, select information from request account information
   	function trueOfFalseHistory() {
     	if (trueOrFalse() === true) {
     		var searchHistoryRefining = accountHist.searchHistory;
@@ -40,9 +39,7 @@ controller.get('/', function(req, res, next) {
     	}
   	}
 
-
-  	// var searchHistoryRefining = searchHistory.searchHistory;
-
+  	// render information
   	res.render('search-history', trueOrFalse() ? {searchHistory: 'Search History',
   								searchLoop: trueOfFalseHistory().filteredHourlyWeather
   	} : { searchHistory: 'Please log in.'});

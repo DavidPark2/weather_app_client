@@ -6,6 +6,7 @@ controller.get('/', function(req, res, next) {
 
 	var todayWeather = req.session.weather;
 
+  // determines if there's weather information in req.session.weather and return true or false
   function trueOrFalse() {
     if (todayWeather === undefined) {
       return false;
@@ -14,6 +15,7 @@ controller.get('/', function(req, res, next) {
     }
   }
 
+  // If true, then select information in req.session.weather
   function trueOfFalseSun() {
     if (trueOrFalse() === true) {
       return { convertedSunrise: timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunriseTime),
@@ -22,9 +24,7 @@ controller.get('/', function(req, res, next) {
     }
   }
 
-  // var convertedSunrise = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunriseTime);
-  // var convertedSunset = timestamp.convertTime(todayWeather.allWeather.current.daily.data[0].sunsetTime);
-
+  // Then render to html
 	res.render('today', trueOrFalse() ? { location: todayWeather.coordinatesAndCity.results[0].formatted_address, 
 		      temp: parseInt(todayWeather.allWeather.current.currently.temperature), 
 		      humidity: parseInt(todayWeather.allWeather.current.currently.humidity * 100),

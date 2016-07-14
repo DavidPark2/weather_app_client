@@ -19,7 +19,6 @@ module.exports.convertTime = function(timestamp) {
 		h = 12;
 	}
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = h + ':' + min + ' ' + ampm;
 		
 	return time;
@@ -36,7 +35,6 @@ module.exports.convertHour = function(timestamp) {
 		ampm = 'AM',
 		time;
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = h + 1;
 		
 	return time;
@@ -63,7 +61,6 @@ module.exports.convertDate = function(timestamp) {
 		h = 12;
 	}
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = mm + '-' + dd + '-' + yyyy;
 		
 	return time;
@@ -108,7 +105,6 @@ module.exports.convertDay = function(timestamp) {
 		days = 'Sunday'
 	}
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = days;
 		
 	return time;
@@ -135,7 +131,6 @@ module.exports.convertDateAndTime = function(timestamp) {
 		h = 12;
 	}
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = mm + '-' + dd + '-' + yyyy + ', ' + h + ':' + min + ' ' + ampm;
 		
 	return time;
@@ -162,7 +157,6 @@ module.exports.convertYear = function(timestamp) {
 		h = 12;
 	}
 	
-	// ie: 2013-02-18, 8:35 AM	
 	time = yyyy;
 		
 	return time;

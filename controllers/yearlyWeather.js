@@ -14,6 +14,7 @@ controller.get('/', function(req, res, next) {
 	    }
   	}
 
+  	// if true, target information inside json
   	function trueOrFalseYearly() {
 	    if (trueOrFalse() === true) {
 	      return { currentYear: yearlyWeather.allWeather.current.daily.data[0],
@@ -26,6 +27,7 @@ controller.get('/', function(req, res, next) {
 	    }
 	  }
 
+	  // if true, render requested json to html
 	res.render('yearly', trueOrFalse() ? {location: yearlyWeather.coordinatesAndCity.results[0].formatted_address, 
 						years: [
 						{ date: timestamp.convertDate(trueOrFalseYearly().currentYear.time),
@@ -86,6 +88,7 @@ controller.get('/', function(req, res, next) {
 	} : {location: 'To get started, enter your location above'});
 })
 
+// this is for d3 chart
 controller.post('/data', function(req, res, next) {
 	var yearlyWeather = req.session.weather;
 

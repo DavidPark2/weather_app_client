@@ -6,6 +6,8 @@ controller.get('/', function(req, res, next) {
 	// Session information
 	var todayWeather = req.session.weather;
 
+	// determine if req.session.weather contains information, if so
+	// return true
 	function trueOrFalse() {
 	    if (todayWeather === undefined) {
 	      	return false;
@@ -14,6 +16,7 @@ controller.get('/', function(req, res, next) {
 	    }
   	}
 
+  	// select the information needed
   	function trueOfFalseHourly() {
     	if (trueOrFalse() === true) {
     		var hourlyWeather = todayWeather.allWeather.current.hourly.data;
@@ -36,6 +39,7 @@ controller.get('/', function(req, res, next) {
     	}
   	}
 
+  	// render information
   	res.render('hourly', trueOrFalse() ? {location: todayWeather.coordinatesAndCity.results[0].formatted_address,
   						hour: trueOfFalseHourly().filteredHourlyWeather
   	} : {location: 'To get started, enter your location above'});

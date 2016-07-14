@@ -1,13 +1,12 @@
 function yearlyChart() {
 	var data;
+	// gather information from yearly data
 	$.ajax({
 		method: 'post',
 		url: 'http://localhost:4000/yearlyWeather/data',
 		async: false,
 		success: function(year) {
 			data = year;
-			console.log(year);
-			console.log('^^^^^^^^^^^^^^^^year')
 		},
 		error: function(err) {
 			console.log(err)
@@ -17,10 +16,7 @@ function yearlyChart() {
 	var highTemp = data.yearsHigh;
 	var lowTemp = data.yearsLow;
 
-	console.log(data);
-	console.log('^^^^^^^^^^^^^^data')
-
-
+	// height, width and margins are going to be used to create the graph
 	var vis = d3.select("#visualisation"),
 		WIDTH = 1000,
 		HEIGHT = 500,
@@ -31,15 +27,19 @@ function yearlyChart() {
 			left: 50
 		},
 
+		// range = area available to render graph
+		// domain = max and min value to plot space
 		xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([2011, 2016]),
 	    yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([50, 100]),
 
+	    // create x and y axis
 		xAxis = d3.svg.axis()
 	        .scale(xScale).ticks(6),
 		yAxis = d3.svg.axis()
 	        .scale(yScale)
 	        .orient("left");
 
+    // append x and y axis to svg
 	vis.append("svg:g")
 	    .attr("class", "x axis")
 	    .attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")")
@@ -50,6 +50,7 @@ function yearlyChart() {
 	    .attr("transform", "translate(" + (MARGINS.left) + ",0)")
 	    .call(yAxis);
 
+	    // using d3.svg.line to draw the line using xscale and yscale
 	var lineGen = d3.svg.line()
         .x(function(d) {
             return xScale(d.year);
@@ -58,6 +59,7 @@ function yearlyChart() {
             return yScale(d.temperature);
         })
 
+        // using linegen function, we will map the data
 	vis.append('svg:path')
         .attr('d', lineGen(highTemp))
         .attr('stroke', 'red')

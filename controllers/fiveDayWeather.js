@@ -6,6 +6,8 @@ controller.get('/', function(req, res, next) {
 	// Session information
 	var fiveDayWeather = req.session.weather;
 
+	// determine if req.session.weather has information,
+	// if so, return true
 	function trueOrFalse() {
 	    if (fiveDayWeather === undefined) {
 	      	return false;
@@ -14,6 +16,7 @@ controller.get('/', function(req, res, next) {
 	    }
   	}
 
+  	// if true, select request information
   	function trueOfFalseDaily() {
     	if (trueOrFalse() === true) {
     		var dailyWeather = fiveDayWeather.allWeather.current.daily.data;
@@ -38,7 +41,7 @@ controller.get('/', function(req, res, next) {
       		}
     	}
   	}
-
+  	// render the selected information
   	res.render('five-days', trueOrFalse() ? {location: fiveDayWeather.coordinatesAndCity.results[0].formatted_address,
   						days: trueOfFalseDaily().filteredDailyWeather
   } : {location: 'To get started, enter your location above'});

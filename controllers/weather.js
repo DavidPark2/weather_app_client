@@ -8,6 +8,7 @@ controller.get('/', function(req, res, next) {
   	res.render('weather');
 })
 
+// get weather information from rest api
 controller.post('/input', function(req, res, next) {
 	var inputLocation = req.body.area;
 	var inputAccount = req.session.email;
