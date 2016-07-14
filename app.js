@@ -32,15 +32,17 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.set('trust proxy', 1);
 app.use(session({
-  store: new RedisStore({url: process.env.REDIS_URL}),
-  secret: 'spacecats',
-  resave: false,
-  saveUninitialized: false
+  secret: 'secret',
+  saveUninitialized: true,
+  resave: true,
+  store: new RedisStore({url: process.env.REDIS_URL})
 }));
 
 app.use('/', defaultPage);
