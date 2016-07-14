@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 
 var defaultPage = require('./controllers/default');
 var weather = require('./controllers/weather');
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.set('trust proxy', 1);
 app.use(session({
+  store: new RedisStore({url: 'redis://h:p8o4qsf79huvuh9h9qmhnip0pqg@ec2-54-243-230-243.compute-1.amazonaws.com:26009'}),
   secret: 'spacecats',
   resave: false,
   saveUninitialized: false
