@@ -3,7 +3,7 @@ function yearlyChart() {
 	// gather information from yearly data
 	$.ajax({
 		method: 'post',
-		url: 'http://localhost:4000/yearlyWeather/data',
+		url: 'superweatherrest.herokuapp.com/yearlyWeather/data',//'http://localhost:4000/yearlyWeather/data',
 		async: false,
 		success: function(year) {
 			data = year;
