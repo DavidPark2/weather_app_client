@@ -6,6 +6,8 @@ controller.get('/', function(req, res, next) {
 	// Session information
 	var todayWeather = req.session.weather;
 
+	console.log(todayWeather);
+	console.log('------------testing req.session.weather todayWeather')
 	// determine if req.session.weather contains information, if so
 	// return true
 	function trueOrFalse() {
