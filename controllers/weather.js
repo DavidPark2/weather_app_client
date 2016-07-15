@@ -13,7 +13,7 @@ controller.post('/input', function(req, res, next) {
 	var inputLocation = req.body.area;
 	var inputAccount = req.session.email;
 
-	var requestedWeather = weatherRequest.weatherInput(inputLocation, inputAccount);
+	var requestedWeather = weatherRequest.weatherInput(inputLocation, inputAccount.email);
 	req.session.weather = requestedWeather;
 	res.redirect('/todayWeather');
 })
