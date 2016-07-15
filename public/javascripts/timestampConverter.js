@@ -35,7 +35,7 @@ module.exports.convertHour = function(timestamp) {
 		ampm = 'AM',
 		time;
 	
-	time = h + 1;
+	time = h - 4;
 		
 	return time;
 }
