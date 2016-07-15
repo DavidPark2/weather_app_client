@@ -20,7 +20,7 @@ controller.post('/input', function(req, res, next) {
 
 	var requestedWeather = weatherRequest.weatherInput(inputLocation, inputAccount);
 	console.log(requestedWeather)
-	console.log('^^^^^^^^^^^^^^^^^^requestedWeather')
+	console.log('^^^^^^^^^^^^^^^^^^requestedWeathers')
 	req.session.weather = requestedWeather;
 	res.redirect('/todayWeather');
 })
