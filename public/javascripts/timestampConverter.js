@@ -19,16 +19,16 @@ module.exports.convertTime = function(timestamp) {
 	// 	h = 12;
 	// }
 
-	if (hh > 7) {
-		h = hh - 7;
+	if (hh > 17) {
+		h = hh - 17;
 		ampm = 'PM';
-	} else if (hh === 7) {
+	} else if (hh === 17) {
 		h = 12;
 		ampm = 'PM';
-	} else if (hh === -5) {
+	} else if (hh === 5) {
 		h = 12;
-	} else if (hh >= -4 && hh <= 5) {
-		h = hh + 7;
+	} else if (hh >= 6 && hh <= 16) {
+		h = hh - 5;
 	}
 	
 	time = h + ':' + min + ' ' + ampm;
