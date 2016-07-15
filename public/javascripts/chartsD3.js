@@ -139,10 +139,11 @@ function yearlyChart() {
 //         .attr('stroke-width', 2)
 //         .attr('fill', 'none');
 // }
-
-if (window.location.href === 'http://superweatherrest.herokuapp.com/yearlyWeather') {
-	yearlyChart()
-} 
+window.onload = function() {
+	if (window.location.href === 'http://superweatherrest.herokuapp.com/yearlyWeather') {
+		yearlyChart()
+	} 
+}
 
 
 
