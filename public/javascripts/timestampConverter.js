@@ -22,7 +22,7 @@ module.exports.convertTime = function(timestamp) {
 	if (hh > 17) {
 		h = hh - 17;
 		ampm = 'PM';
-	} else if (hh >= 1 && hh <= 5) {
+	} else if (hh >= 0 && hh <= 4) {
 		h = hh + 6;
 		ampm = 'PM';
 	} else if (hh === 17) {
