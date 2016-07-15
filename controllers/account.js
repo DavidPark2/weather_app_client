@@ -47,7 +47,7 @@ controller.post('/signup', function(req, res, next) {
 	// if successful, create sessions
 	if (requestedSignup.success === true) {
 		console.log('right before sessions')
-		req.session.email = login.email
+		req.session.email = signup.email
 		req.session.account = requestedSignup;
 		console.log('below----------------------req.session.account')
 		console.log(req.session.account)
